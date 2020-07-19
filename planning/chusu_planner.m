@@ -5,14 +5,14 @@ clear;
 clc;
 
 %% Getting World Info
-%grid = rand(30);
-grid = 0.1 .* ones(30);
+grid = rand(30);
+%grid = 0.1 .* ones(30);
 [width, height] = size(grid);
 
 % Add some high score cell for test
-grid(2,2) = 1;
-grid(2,3) = 1;
-grid(2,4) = 1;
+%grid(2,2) = 1;
+%grid(2,3) = 1;
+%grid(2,4) = 1;
 
 %% Initialize swarm
 n = 4;              % Robot carrying capacity
@@ -59,9 +59,8 @@ while (i < num_iterations)
     for j = 1:num_particles
         
         % Select X_neigh, based on external archive
-        X_neigh = swarm.X(j, :);
-        for k = 1:size_archive
-        end 
+        index = round(1 + (size_archive - 1) * rand);
+        X_neigh = swarm.archive(index, :);        
         
         % Compute new velocity
         swarm.V(j, :) = omega .* swarm.V(j, :) ...
