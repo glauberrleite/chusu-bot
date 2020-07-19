@@ -92,23 +92,16 @@ while (i < num_iterations)
     i = i + 1;
 end
 
-%% Choose and show best trajectory
+%% Choose trajectory
 H = max(swarm.archive_obj(:, 1));
 index_H = find(swarm.archive_obj(:, 1) == H);
 [D, index_D] = min(swarm.archive_obj(index_H, 2));
 
 best_particle = index_H(index_D);
 
-disp('SCORE')
-disp('----------------')
-disp(['H = ', num2str(H), '; D = ', num2str(D)])
-disp('----------------')
-
-
 for i = 1:2:2*n
-    disp(['Cell ', num2str(round(i/2))])
-    disp('----------------')
-    disp(['X = ', num2str(swarm.archive(best_particle, i)), '; Y = ', num2str(swarm.archive(best_particle, i+1))])
-    disp('----------------')
+    disp(['Cell'])
+    disp(['----------------'])
+    disp(['X = ', swarm.archive(best_particle, n), ' Y = ', swarm.archive(best_particle, n+1)])
+    disp(['----------------'])
 end
-
