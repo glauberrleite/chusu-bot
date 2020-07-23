@@ -15,14 +15,15 @@ class Tray:
 
     def update_sensors(self):
         #here some magic happens
+        
         #color, radius and havest_score are updated
         #updated_time = date.today() - time
         #self.havest_score = self.Havest(updated_color, updated_radius, updated_time)
-        #updated_time = date.today() - self.time
-        updated_time = self.time + 1
+        
+        self.time = self.time + 1
         self.color = np.random.randint(255)
         self.radius = np.random.rand() + np.random.randint(5)
-        self.havest_score = self.havest(self.color, self.radius, updated_time)
+        self.havest_score = self.havest(self.color, self.radius, self.time)
 
     def havest(self, color, radius, time):
         w_c = 0.2 

@@ -9,9 +9,9 @@ class Chusu:
     def __init__(self, chusu_size):
         self.chusu = np.zeros((3,3))
         self.trays_list = []
-        self.luminous = "780lx"
-        self.temperature = "28°C"
-        self.humidity = "70%"
+        self.luminous = "780lx"    #Fake data sensing Lux
+        self.temperature = "28°C"  #Fake data sensing Temperature
+        self.humidity = "70%"      #Fake data sensing Humidity
     
     def new_Tray(self):
         if len(self.trays_list) < self.chusu.size:
@@ -32,13 +32,12 @@ class Chusu:
             print("Chusu it's already full, choose another one")
 
     def update_status(self):
-        #self.update_tray_status()
         print(self.temperature, self.humidity, self.luminous)
 
     def update_tray_status(self):
         for tray in self.trays_list:
             tray.update_sensors()
-        print(tray.id, tray.color, tray.radius, tray.havest_score, tray.time)
+            print(tray.id, tray.color, tray.radius, tray.havest_score, tray.time)
 
     def remove_tray(self, tray_id):
         #remove tray by id
@@ -46,16 +45,7 @@ class Chusu:
         return
 
     def central_server_update(self):
-    
-    #    chusu_data = {
-    #        'id': tray.id, 
-    #        'coordinates': tray.coordinates,
-    #        'color': tray.color,
-    #        'radius': tray.radius,
-    #        'time': tray.time,
-    #        'havest_score': tray.havest_score
-    #    }
-    
+
         chusu_data_frame = pd.DataFrame(columns=['id', 
                                                 'coordinates',
                                                 'color',
@@ -72,24 +62,20 @@ class Chusu:
                                         tray.havest_score]
 
         chusu_data_frame.to_csv('chusu_sensors_update.csv', float_format='%.2f')
+        print("Central Server Update")
 
 if __name__ == "__main__":
 
     chusinho = Chusu(3)
     for i in range(5):
         chusinho.new_Tray()
-    for i in range(5):
+    
+    # Simulation
+    while(True):
+        chusinho.update_status()
+        sleep(5)
         chusinho.update_tray_status()
-    chusinho.update_tray_status()
-    chusinho.update_status()
-
-    chusinho.central_server_update()
-
-#    while(True):
-#        chusinho.update_status()
-#        sleep(10)
-#        chusinho.update_tray_status()
-#        sleep(10)
-#        chusinho.central_server_update()
-#        sleep(30)
+        sleep(10)
+        chusinho.central_server_update()
+        sleep(5)
 
