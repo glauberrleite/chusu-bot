@@ -64,11 +64,11 @@ class Chusu:
                                                 'havest_score'])
 
         for tray in self.trays_list:
-            chusu_data_frame.loc[tray] = [tray.id + 
-                                        tray.coordinates +
-                                        tray.color +
-                                        tray.radius +
-                                        tray.time +
+            chusu_data_frame.loc[tray] = [tray.id, 
+                                        tray.coordinates,
+                                        tray.color,
+                                        tray.radius,
+                                        tray.time,
                                         tray.havest_score]
 
         chusu_data_frame.to_csv('chusu_sensors_update.csv', float_format='%.2f')
@@ -81,9 +81,9 @@ if __name__ == "__main__":
     for i in range(5):
         chusinho.update_tray_status()
     chusinho.update_tray_status()
-    chusinho.update_tray_status()
-    chusinho.update_tray_status()
     chusinho.update_status()
+
+    chusinho.central_server_update()
 
 #    while(True):
 #        chusinho.update_status()

@@ -1,0 +1,6 @@
+,id,coordinates,color,radius,time,havest_score
+<tray.Tray object at 0x7f5a4c869eb8>,9,"(0, 0)",127,1.10,0,0.83
+<tray.Tray object at 0x7f5a37e3d4e0>,8,"(0, 1)",239,2.65,0,1.29
+<tray.Tray object at 0x7f5a37be9588>,7,"(0, 2)",120,3.08,0,1.42
+<tray.Tray object at 0x7f5a36fb7198>,6,"(1, 0)",181,4.25,0,1.78
+<tray.Tray object at 0x7f5a36fb71d0>,5,"(1, 1)",29,2.49,0,1.25
