@@ -1,7 +1,7 @@
 import json
 import numpy as np
 import pandas as pd 
-from datetime import date
+import tray
 from time import sleep
 
 class Chusu:
@@ -17,16 +17,17 @@ class Chusu:
         if len(self.trays_list) < self.chusu.size:
                 
             # searching for an empty space for a new tray
-            empty_tray = np.where(self.chusu_trays == 0)
-            tray_index = list(zip(tray_index[0],tray_index[1]))
+            empty_tray = np.where(self.chusu == 0)
+            tray_index = list(zip(empty_tray[0],empty_tray[1]))
             
             # initiating a new Tray 
             # after creating needs to update
-            tray = Tray(self.chusu.size - len(self.trays_list), tray_index[0], 0,0)
-            self.trays_list.append(tray)
+
+            new_tray = tray.Tray(self.chusu.size - len(self.trays_list), tray_index[0], 0,0)
+            self.trays_list.append(new_tray)
 
             #updating cell status
-            self.chusu_trays[tray_index[0][0]][tray_index[0][1]] = 1
+            self.chusu[tray_index[0][0]][tray_index[0][1]] = 1
         else:
             print("Chusu it's already full, choose another one")
 
@@ -72,44 +73,18 @@ class Chusu:
 
         chusu_data_frame.to_csv('chusu_sensors_update.csv', float_format='%.2f')
 
-
-class Tray:
-    
-    def __init__(self, id, coordinates, color, radius):
-        self.id = id
-        self.coordinates = coordinates
-        self.color = color
-        self.radius = radius
-        self.time = date.today()
-        self.havest_score = 0
-
-    def update_sensors(self):
-        #here some magic happens
-        #color, radius and havest_score are updated
-        #updated_time = date.today() - time
-        #self.havest_score = self.Havest(updated_color, updated_radius, updated_time)
-        updated_time = date.today() - time
-        self.havest_score = self.Havest(np.random.randint(255), np.random().rand() + np.random.randint(5), updated_time)
-
-    def Havest(self, color, radius, time):
-        w_c = 0.2 
-        w_r = 0.3
-        w_t = 0.5
-        return w_c*pow(color, -1) + w_r*radius + w_t*time
-
-
-
 if __name__ == "__main__":
 
     chusinho = Chusu(3)
     chusinho.new_Tray()
     chusinho.update_tray_status()
+    chusinho.update_status()
 
-    while(True):
-        chusinho.update_status()
-        sleep(10)
-        chusinho.update_tray_status()
-        sleep(10)
-        chusinho.central_server_update()
-        sleep(30)
+#    while(True):
+#        chusinho.update_status()
+#        sleep(10)
+#        chusinho.update_tray_status()
+#        sleep(10)
+#        chusinho.central_server_update()
+#        sleep(30)
 
