@@ -42,10 +42,10 @@ try:
 
     ## Defining robot kinematic model
     robot = KukaYoubotRobot.kinematics()
-    xd    = robot.fkm((0,0,0,pi,0,pi/2,0,0))
+    xd    = robot.fkm((0,0,0,0,0,-pi/2,0,0))
     
     ## Defining target joints
-    vi.set_joint_positions(joint_names,((pi/2,0,pi/5,0,0)))
+    vi.set_joint_positions(joint_names,((0,0,-pi/5,0,0)))
     theta = vi.get_joint_positions(joint_names)
     
     ## Define error as something big
@@ -55,6 +55,7 @@ try:
         theta = youbot_vreprobot.get_q_from_vrep()
         x     = robot.fkm(theta)
         e     = vec8(x-xd)
+        print(np.linalg.norm(e))
         J     = robot.pose_jacobian(theta)
         u     = -0.01*np.matmul(np.linalg.pinv(J),e)
         theta = theta+u
