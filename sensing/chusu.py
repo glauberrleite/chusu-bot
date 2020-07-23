@@ -33,12 +33,12 @@ class Chusu:
 
     def update_status(self):
         #self.update_tray_status()
-        print(self.temperature + self.humidity + self.luminous)
+        print(self.temperature, self.humidity, self.luminous)
 
     def update_tray_status(self):
         for tray in self.trays_list:
             tray.update_sensors()
-        print(tray.id + tray.color + tray.radius + tray.havest_score + tray.time)
+        print(tray.id, tray.color, tray.radius, tray.havest_score, tray.time)
 
     def remove_tray(self, tray_id):
         #remove tray by id
@@ -76,7 +76,12 @@ class Chusu:
 if __name__ == "__main__":
 
     chusinho = Chusu(3)
-    chusinho.new_Tray()
+    for i in range(5):
+        chusinho.new_Tray()
+    for i in range(5):
+        chusinho.update_tray_status()
+    chusinho.update_tray_status()
+    chusinho.update_tray_status()
     chusinho.update_tray_status()
     chusinho.update_status()
 
