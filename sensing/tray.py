@@ -17,9 +17,11 @@ class Tray:
         #updated_time = date.today() - time
         #self.havest_score = self.Havest(updated_color, updated_radius, updated_time)
         updated_time = date.today() - self.time
-        self.havest_score = self.Havest(np.random.randint(255), np.random().rand() + np.random.randint(5), updated_time)
+        updated_color = np.random.randint(255)
+        updated_radius = np.random.rand() + np.random.randint(5)
+        self.havest_score = self.havest(updated_color, updated_radius, updated_time)
 
-    def Havest(self, color, radius, time):
+    def havest(self, color, radius, time):
         w_c = 0.2 
         w_r = 0.3
         w_t = 0.5
